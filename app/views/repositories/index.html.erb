@@ -1,0 +1,32 @@
+<div class = "container">
+  <h1>Public repositories</h1>
+  <%= form_tag repositories_path, method: :get do %>
+    <%= label_tag(:name, "Search a Repo:") %>
+    <%= text_field_tag :query, params["query"] %>
+    <%= submit_tag "Search", name: nil %>
+    <% if @total_result > 0 %>
+      <th><%= @total_result %> repo found</th>
+      <% if @total_pages > 0 %>
+        <th>-- <%= @total_pages %> page/pages found, select page</th>
+        <%= select_tag :page, options_for_select(1..@total_pages, @selected_page), onchange: "this.form.submit();" %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Owner</th>
+      <th>User Image</th>
+    </tr>
+    <% @repositories.each do |item| %>
+      <tr>
+        <td><%= item['id'] %></td>
+        <td><%= item['name'] %></td>
+        <td><%= item['owner']['login'] %></td>
+        <td><%= image_tag item['owner']['avatar_url'], size: "50x50" %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
