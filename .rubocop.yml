@@ -6,12 +6,13 @@ AllCops:
     - 'node_modules/**/*'
     - 'Gemfile'
     - 'Rakefile'
+  NewCops: enable
 Layout/LineLength:
   Max: 100
 Style/Documentation:
   Enabled: false
 Metrics/BlockLength:
-  ExcludedMethods: ['describe']
+  IgnoredMethods: ['describe']
 Metrics/MethodLength:
   Max: 15
 Metrics/AbcSize:
